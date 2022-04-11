@@ -1,12 +1,13 @@
 import { Body, Controller, Delete, Get, Post } from '@nestjs/common'
 import { ApiOperation } from '@nestjs/swagger'
 import { AppService } from './app.service'
+import { ChatService } from './chat/chat.service'
 import { BatchDto } from './common/dto/batch.dto'
 import { BodyDto } from './common/dto/body.dto'
 
 @Controller()
 export class AppController {
-    constructor(private readonly appService: AppService) {}
+    constructor(private appService: AppService, private chatService: ChatService) {}
 
     @Get()
     getHello(): string {
@@ -16,7 +17,7 @@ export class AppController {
     @ApiOperation({ summary: 'MSG HOOK' })
     @Post()
     async handleMsg(@Body() body: BodyDto) {
-        return await this.appService.processMessages(body.messages)
+        return await this.chatService.processMessages(body.messages)
     }
 
     @ApiOperation({ summary: 'SUBMIT ACTIONS' })

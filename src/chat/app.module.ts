@@ -1,18 +1,18 @@
 import { Module } from '@nestjs/common'
-import { AppController } from './app.controller'
-import { AppService } from './app.service'
+import { AppController } from '../app.controller'
+import { AppService } from '../app.service'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { SequelizeModule } from '@nestjs/sequelize'
-import { UserModule } from './user/user.module'
-import { User } from './user/model/user.model'
-import { ChatModule } from './chat/chat.module'
-import { Chat } from './chat/model/chat.model'
-import { MessageLog } from './chat/model/messageLog.model'
-import { MessageLogData } from './chat/model/messageLogData.model'
-import { ActionModule } from './action/action.module'
-import { NextAction } from './action/model/nextAction.model'
-import { Message } from './chat/model/message.model'
-import { Action } from './action/model/action.model'
+import { UserModule } from '../user/user.module'
+import { User } from '../user/model/user.model'
+import { ChatModule } from './chat.module'
+import { Chat } from './model/chat.model'
+import { MessageLog } from './model/messageLog.model'
+import { MessageLogData } from './model/messageLogData.model'
+import { ActionModule } from '../action/action.module'
+import { NextAction } from '../action/model/nextAction.model'
+import { Message } from './model/message.model'
+import { Action } from '../action/model/action.model'
 import { BullModule } from '@nestjs/bull'
 
 @Module({
@@ -29,6 +29,9 @@ import { BullModule } from '@nestjs/bull'
                 },
             }),
             inject: [ConfigService],
+        }),
+        BullModule.registerQueue({
+            name: 'app',
         }),
         SequelizeModule.forRoot({
             dialect: 'postgres',
