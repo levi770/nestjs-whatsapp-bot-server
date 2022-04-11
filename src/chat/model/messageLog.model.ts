@@ -1,9 +1,8 @@
 import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from 'sequelize-typescript'
+import { Action } from 'src/action/model/action.model'
 import { Chat } from 'src/chat/model/chat.model'
-import { Question } from 'src/action/model/question.model'
 import { Message } from './message.model'
 import { MessageLogData } from './messageLogData.model'
-import { Command } from 'src/action/model/command.model'
 
 @Table({ tableName: 'messageLog' })
 export class MessageLog extends Model<MessageLog> {
@@ -19,11 +18,11 @@ export class MessageLog extends Model<MessageLog> {
     @BelongsTo(() => Chat)
     chat: Chat
 
-    @ForeignKey(() => Question)
-    curentQuestionId: string
+    @ForeignKey(() => Action)
+    nextActionId: string
 
-    @ForeignKey(() => Command)
-    curentCommandId: string
+    @BelongsTo(() => Action)
+    nextAction: Action
 
     @HasMany(() => Message)
     messages: Message[]

@@ -6,17 +6,13 @@ import { SequelizeModule } from '@nestjs/sequelize'
 import { UserModule } from './user/user.module'
 import { User } from './user/model/user.model'
 import { ChatModule } from './chat/chat.module'
-import { AnswerModule } from './answer/answer.module'
-import { MessageModule } from './message/message.module'
 import { Chat } from './chat/model/chat.model'
-import { Message } from './message/model/message.model'
-import { MessageLog } from './message/model/messageLog.model'
-import { MessageLogData } from './message/model/messageLogData.model'
-import { Command } from './action/model/command.model'
-import { Question } from './action/model/question.model'
-import { Answer } from './answer/model/answer.model'
+import { MessageLog } from './chat/model/messageLog.model'
+import { MessageLogData } from './chat/model/messageLogData.model'
 import { ActionModule } from './action/action.module'
 import { NextAction } from './action/model/nextAction.model'
+import { Message } from './chat/model/message.model'
+import { Action } from './action/model/action.model'
 
 @Module({
     imports: [
@@ -30,15 +26,13 @@ import { NextAction } from './action/model/nextAction.model'
             username: process.env.POSTGRES_USER,
             password: process.env.POSTGRES_PASSWORD,
             database: process.env.POSTGRES_DB,
-            models: [User, Chat, Message, MessageLog, MessageLogData, Command, Question, Answer, NextAction],
+            models: [User, Chat, Message, MessageLog, MessageLogData, Action, NextAction],
             autoLoadModels: true,
             synchronize: true,
             logging: false,
         }),
         UserModule,
         ChatModule,
-        AnswerModule,
-        MessageModule,
         ActionModule,
     ],
     controllers: [AppController],

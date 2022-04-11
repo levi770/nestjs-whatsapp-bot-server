@@ -1,15 +1,14 @@
-import { Column, DataType, ForeignKey, Model, Table } from 'sequelize-typescript'
-import { Question } from 'src/action/model/question.model'
-import { Command } from './command.model'
+import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from 'sequelize-typescript'
+import { Action } from './action.model'
 
 @Table({ tableName: 'nextAction' })
 export class NextAction extends Model<NextAction> {
     @Column({ type: DataType.UUID, defaultValue: DataType.UUIDV4, primaryKey: true })
     id: string
 
-    @ForeignKey(() => Question)
-    nextQuestionId: string
+    @ForeignKey(() => Action)
+    actionId: string
 
-    @ForeignKey(() => Command)
-    nextCommandId: string
+    @BelongsTo(() => Action, { onDelete: 'CASCADE' })
+    action: Action
 }

@@ -1,5 +1,5 @@
 import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from 'sequelize-typescript'
-import { MessageLog } from 'src/message/model/messageLog.model'
+import { MessageLog } from 'src/chat/model/messageLog.model'
 import { User } from 'src/user/model/user.model'
 
 interface ChatCreationAttrs {

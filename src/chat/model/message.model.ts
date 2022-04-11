@@ -17,7 +17,7 @@ export class Message extends Model<Message, MessageCreationAttrs> {
     @Column({ type: DataType.STRING })
     messageId: string
 
-    @Column({ type: DataType.STRING })
+    @Column({ type: DataType.STRING(1020) })
     body: string
 
     @Column({ type: DataType.STRING })

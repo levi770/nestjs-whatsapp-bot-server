@@ -26,7 +26,7 @@ async function start() {
         const document = SwaggerModule.createDocument(app, config)
         SwaggerModule.setup('/docs', app, document)
 
-        await app.listen(5000, async () => console.log(`Server started on port ${await app.getUrl()}`))
+        await app.listen(5000, '0.0.0.0', async () => console.log(`Server started on port ${await app.getUrl()}`))
     } catch (error) {
         console.log(error)
     }
